@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {View, StyleSheet, Text, Pressable, Modal, Button} from 'react-native';
+import { TextInput } from 'react-native-gesture-handler';
 import Carousel from 'react-native-snap-carousel';
 import { getDataDB } from '../../helpers/getDataDB';
 import { globalStyle } from '../../styles';
@@ -7,8 +8,6 @@ import Card from '../components/card';
 const Panel = () => {
     const [isVisible, setIsVisible] = useState(false);
     const {useGetDevice, addDevice} = getDataDB()
-
-    console.log(typeof(useGetDevice), 'lol')
 
     return ( 
         <View style={styles.container}>
@@ -23,8 +22,8 @@ const Panel = () => {
                             <View style={styles.formModal}>
                                 <Text style= {[styles.text, styles.textTitle]}>Nuevo Dispositivo</Text>
                                 <Text style= {[styles.text, styles.textNum]}>Número de SIM</Text>
-                                {/* <TextInput style={styles.input} placeholderTextColor="#000" keyboardType='number-pad'
-                        maxLength={10} placeholder='Número' value={dn} onChangeText={setdn}/> */}
+                                <TextInput style={styles.input} placeholderTextColor="#000" keyboardType='number-pad'
+                        maxLength={10} placeholder='Número' value={dn} onChangeText={setdn}/>
                             </View>
                             <View style={styles.btns}>
                                 <Button color="red"  title='Cancelar' onPress={() => setIsVisible(false)}></Button>
@@ -35,8 +34,7 @@ const Panel = () => {
                 </Modal>
             </View>
             <View style={styles.body}>
-                <Card></Card>
-            {/* {
+            {
                     useGetDevice.length === 0 ? <Text>Aún no cuenta con dispositivos</Text> :
                     <View style={{flex: 1}}>
                         <Carousel
@@ -45,13 +43,13 @@ const Panel = () => {
                         data={useGetDevice}
                         keyExtractor={(item) => item.id}
                         renderItem={({item}) => {return(
-                            <Card device={item} item={item} accessToken={accessToken}></Card>
+                            <Card device={item} item={item} ></Card>
                         )}}
                         
                         />
                     </View>
 
-                }   */}
+                }  
             </View>
         </View>
      );
@@ -102,7 +100,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     btnAddDevice:{
-        padding: 5,
+        paddingHorizontal: 5,
         color:'black',
         fontSize: 15,
         borderWidth: 1,
