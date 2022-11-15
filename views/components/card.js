@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         borderRadius: 15,
         borderColor: '#005bc5',
-        backgroundColor: '#e6e8e3'
+        backgroundColor: '#ffff'
     },
     headerDevice:{
         width: '100%',

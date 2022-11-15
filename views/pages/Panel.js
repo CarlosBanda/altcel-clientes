@@ -6,9 +6,9 @@ import { globalStyle } from '../../styles';
 import Card from '../components/card';
 const Panel = () => {
     const [isVisible, setIsVisible] = useState(false);
-    const {useGetDevice, addDevice} = getDataDB()
+    const {useGetDevice, addDevice} = getDataDB();
 
-    console.log(typeof(useGetDevice), 'lol')
+    // console.log(typeof(useGetDevice), 'lol')
 
     return ( 
         <View style={styles.container}>
@@ -35,8 +35,8 @@ const Panel = () => {
                 </Modal>
             </View>
             <View style={styles.body}>
-                <Card></Card>
-            {/* {
+                {/* <Card></Card> */}
+            {
                     useGetDevice.length === 0 ? <Text>Aún no cuenta con dispositivos</Text> :
                     <View style={{flex: 1}}>
                         <Carousel
@@ -45,13 +45,13 @@ const Panel = () => {
                         data={useGetDevice}
                         keyExtractor={(item) => item.id}
                         renderItem={({item}) => {return(
-                            <Card device={item} item={item} accessToken={accessToken}></Card>
+                            <Card device={item} item={item}></Card>
                         )}}
                         
                         />
                     </View>
 
-                }   */}
+                }  
             </View>
         </View>
      );
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     },
     container:{
         flex: 1,
-        backgroundColor: 'white',
+        backgroundColor: '#f2f2f2',
     },
     body:{
         flex: 10,
