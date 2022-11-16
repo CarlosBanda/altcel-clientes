@@ -7,6 +7,7 @@ import { getDataDB } from '../../helpers/getDataDB';
 import { globalStyle } from '../../styles';
 import Card from '../components/card';
 const Panel = () => {
+    const [dn, setdn] = useState('')
     const [isVisible, setIsVisible] = useState(false);
     const {useGetDevice, addDevice} = getDataDB();
 
@@ -26,7 +27,7 @@ const Panel = () => {
                                 <Text style= {[styles.text, styles.textTitle]}>Nuevo Dispositivo</Text>
                                 <Text style= {[styles.text, styles.textNum]}>Número de SIM</Text>
                                 <TextInput style={styles.input} placeholderTextColor="#000" keyboardType='number-pad'
-                        maxLength={10} placeholder='Número' value={dn} onChangeText={setdn}/>
+                        maxLength={10} placeholder='Número' value={dn}  onChangeText={setdn}/>
                             </View>
                             <View style={styles.btns}>
                                 <Button color="red"  title='Cancelar' onPress={() => setIsVisible(false)}></Button>
@@ -104,7 +105,8 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     btnAddDevice:{
-        paddingHorizontal: 5,
+        paddingHorizontal: 10,
+        // paddingVertical: 5 ,
         color:'black',
         fontSize: 15,
         borderWidth: 1,
