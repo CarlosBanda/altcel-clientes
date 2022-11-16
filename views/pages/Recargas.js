@@ -24,12 +24,22 @@ const Recargas = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const {useGetDevice} = getDataDB();
 
+    const [product, setProduct] = useState('');
+    const [number, setNumber] = useState('');
+
+    const getDataNumber = data => {
+        setProduct(data.product);
+        setNumber(data.number);
+        setModalVisible(true);
+    }
 
     return ( 
         <>
         <RecargaModal
             modalVisible={modalVisible}
             setModalVisible={setModalVisible}
+            product={product}
+            number={number}
         />
             <View style={styles.contenedor}>
                 <View style={styles.headerDevice}>
@@ -92,11 +102,11 @@ const Recargas = () => {
                                         style={styles.btnRecargar}
                                         onPress={() => {
                                         getDataNumber({product: item.service, number: item.number})
-                                        // getDataProductDB({product: item.service})
                                         }
-                                        }>
+                                        }
+                                    >
                                         <Text style={styles.textoRecargar} component={PanelNavigations}>
-                                        <Icon name="shopping-cart" size={30} />Recargar
+                                            <Icon name="shopping-cart" size={30} /> Recargar
                                         </Text>
                                     </Pressable>
                                 </View>
@@ -104,29 +114,6 @@ const Recargas = () => {
                         </ScrollView>
                     )}}
                   />
-                    // <View style={styles.card}>
-                    //     <View style={styles.infoPlan}>
-                    //         <View style={styles.mtText}>
-                    //             <Text style={[styles.text, styles.infoCenter]}>961840957</Text>
-                    //             <View>
-                    //                 <View>
-                    //                     <Image style={styles.servicioMov} source={require('../../assets/img/MIFI-2.png')}/>
-                    //                 </View>
-                    //                 <View style={styles.logoMov}>
-                    //                     <Image style={styles.logoMovImg} source={require('../../assets/img/MIFI.png')}/>
-                    //                 </View>
-                    //             </View>
-                    //         </View>
-                    //     </View>
-                    //     <Pressable
-                    //         style={styles.btnRecargar}
-                    //         onPress={() => setModalVisible(true)}
-                    //     >
-                    //         <Text style={styles.textoRecargar} component={PanelNavigations}>
-                    //             <Icon name="shopping-cart" size={30} /> Recargar
-                    //         </Text>
-                    //     </Pressable>
-                    // </View>
                 }
             </View>
         </>
@@ -174,19 +161,50 @@ const styles = StyleSheet.create({
         alignItems:'center',
         fontSize: 25
     },
+    servicioMifi:{
+      width: 90,
+      height: 35,
+      marginVertical: 15,
+      marginHorizontal: 1
+    },
+    mifiDevice:{
+        height: 140,
+        width: 150,
+        marginVertical: 30,
+        marginHorizontal: 50,
+    },
+    servicioHbb:{
+      width: 90,
+      height: 35,
+      marginVertical: 15,
+      marginHorizontal: 15
+    },
     servicioMov:{
-        width: 90,
-        height: 35,
-        marginVertical: 15,
-        marginHorizontal: 22
+      width: 90,
+      height: 35,
+      marginVertical: 15,
+      marginHorizontal: 22
     },
     logoMov:{
-        marginHorizontal: 30,
-        marginVertical: 10
+      width: 100,
+      height: 80,
     },
-    logoMovImg:{
-        width: 80,
-        height: 100,
+    logo:{
+      width: 100,
+      height: 80,
+    },
+    logoMifi:{
+      width: 80,
+      height: 100,
+    },
+    logoHbb:{
+      width:100,
+      height: 80,
+      marginBottom: 10
+    },
+    image: {
+      flex: 1,
+      justifyContent: "center"
     },
     btnRecargar:{
         backgroundColor: '#001b54',
@@ -202,7 +220,8 @@ const styles = StyleSheet.create({
       textTransform: 'uppercase',
       fontWeight: 'bold',
       marginHorizontal: -5
-    }
-});
+    },
+  
+  })
 
 export default Recargas;

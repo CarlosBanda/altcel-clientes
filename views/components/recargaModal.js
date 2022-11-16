@@ -1,7 +1,7 @@
 import React from 'react'
 import {SafeAreaView, Modal, Text, StyleSheet, View, Image, Pressable, Picker} from 'react-native';
 
-const RecargaModal = ({modalVisible, setModalVisible}) => {
+const RecargaModal = ({modalVisible, setModalVisible, product, number}) => {
   return (
      <Modal
         animationType='slide'
@@ -9,7 +9,7 @@ const RecargaModal = ({modalVisible, setModalVisible}) => {
      >
         <SafeAreaView>
           <View style={styles.headerDevice}>
-            <Text style={styles.tituloNumero}>Mis números 9611840957</Text>
+            <Text style={styles.tituloNumero}>Mis números {number}</Text>
           </View>
 
           <View style={styles.contenedorBotones}>
@@ -25,8 +25,8 @@ const RecargaModal = ({modalVisible, setModalVisible}) => {
           
           <View style={styles.card}>
             <View>
-              <Text style={[styles.text, styles.infoHbb]}>MIFI</Text>
-              <Text style={[styles.text, styles.infoCenter]}>9614527258</Text>
+              <Text style={[styles.text, styles.infoHbb]}>{product}</Text>
+              <Text style={[styles.text, styles.infoCenter]}>{number}</Text>
             </View>
             <View>
               <Image style={styles.servicioMov} source={require('../../assets/img/MIFI.png')}/>
