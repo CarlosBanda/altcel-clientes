@@ -96,7 +96,8 @@ const styles = StyleSheet.create({
         marginHorizontal: 50,  
         marginVertical: 10,
         paddingHorizontal:20,
-        paddingVertical:5
+        paddingVertical:5,
+        alignItems: 'center'
     },
     infoPlan:{
         alignItems: 'center'
