@@ -53,8 +53,8 @@ function Card({device}) {
 const styles = StyleSheet.create({
     card:{
         flex: 1,
-        marginHorizontal:40,
         height:'100%',
+        width:'100%',
         borderWidth: 2,
         borderStyle: 'solid',
         borderRadius: 15,
@@ -93,9 +93,10 @@ const styles = StyleSheet.create({
         marginBottom: 15,
         borderColor: '#fb0c06',
         padding: 3,
-        marginHorizontal: 80,  
+        marginHorizontal: 50,  
         marginVertical: 10,
-        paddingHorizontal:10
+        paddingHorizontal:20,
+        paddingVertical:5
     },
     infoPlan:{
         alignItems: 'center'

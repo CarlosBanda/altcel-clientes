@@ -6,7 +6,7 @@ import axios from "axios";
 // import Panel from "../components/panel";
 
 export const getDataDB = () => {
-    const [useGetDevice, setUseGetDevice] = useState([])
+    const [useGetDevice, setUseGetDevice] = useState({})
     const [isLoading, setIsLoading] = useState(false)
 
     const getDevices = async () => {
@@ -18,7 +18,6 @@ export const getDataDB = () => {
                 console.log(error);
             }
     }
-
     useEffect(() => {
       
         getDevices();
