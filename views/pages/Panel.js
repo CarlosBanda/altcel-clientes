@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {View, StyleSheet, Text, Pressable, Modal, Button} from 'react-native';
-import { TextInput } from 'react-native-gesture-handler';
+// import { TextInput } from 'react-native-gesture-handler';
+import { TextInput } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import { getDataDB } from '../../helpers/getDataDB';
 import { globalStyle } from '../../styles';
