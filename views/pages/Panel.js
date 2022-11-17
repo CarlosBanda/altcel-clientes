@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import {View, StyleSheet, Text, Pressable, Modal, Button} from 'react-native';
+import {View, StyleSheet, Text, Pressable, Modal, Button, ActivityIndicator} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome'
 import { TextInput } from 'react-native-gesture-handler';
 import Carousel from 'react-native-snap-carousel';
 import { getDataDB } from '../../helpers/getDataDB';
@@ -8,15 +9,20 @@ import Card from '../components/card';
 const Panel = () => {
     const [dn, setdn] = useState('')
     const [isVisible, setIsVisible] = useState(false);
-    const {useGetDevice, addDevice} = getDataDB();
+    const {useGetDevice, addDevice, isLoading} = getDataDB();
 
-    // console.log(typeof(useGetDevice), 'lol')
-
+    if (isLoading) {
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', alignContent: 'center' }}>
+                <ActivityIndicator color="red" size={ 100 } />
+            </View>
+        )
+    }
     return ( 
         <View style={styles.container}>
             <View style={styles.addDevice}>
                 <Pressable style={styles.btnAddDevice} onPress={() => setIsVisible(true)}>
-                    <Text style={{color:'black', alignItems:'center'}}>Agregar Dispositivo </Text>
+                    <Text style={{color:'black', alignItems:'center', fontSize: 15}}>Agregar Dispositivo <Icon name='plus' size={15} color={'#005bc5'}/></Text>
                 </Pressable>
 
                 <Modal animationType='slide' transparent={true} visible={isVisible}>

@@ -10,10 +10,12 @@ export const getDataDB = () => {
     const [isLoading, setIsLoading] = useState(false)
 
     const getDevices = async () => {
+        setIsLoading(true)
             try {
                 const userid = 41;
                 const response = await axios.get('https://appmobile.altcel2.com/devices?userid='+userid);
                 setUseGetDevice(response.data.devices)
+                setIsLoading(false)
             } catch (error) {
                 console.log(error);
             }
@@ -24,6 +26,7 @@ export const getDataDB = () => {
     }, [])
 
     return{
-        useGetDevice
+        useGetDevice,
+        isLoading
     }
 }
