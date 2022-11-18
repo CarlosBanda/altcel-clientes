@@ -1,18 +1,19 @@
 import React from 'react';
 import {Modal, Text, StyleSheet, View, Pressable} from 'react-native';
-import { TextInput, Button } from 'react-native-paper';
+// import { TextInput, Button } from 'react-native-paper';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 
 
 const RecargaStripe = ({modalStripe, setModalStripe, categoriaRecarga, offerID}) => {
-     console.log("offerID",offerID);
+     // console.log("offerID",offerID);
   return (
      <Modal
         animationType='slide'
         visible={modalStripe}
      >
-          <View style={styles.contenedor}>
+          <View>Hola</View>
+          {/* <View style={styles.contenedor}>
                <View style={styles.contenedorBotones}>
                     <Pressable 
                          onPress={() => {
@@ -39,7 +40,7 @@ const RecargaStripe = ({modalStripe, setModalStripe, categoriaRecarga, offerID})
                <Button mode='contained' contentStyle={styles.btnContent} labelStyle={styles.btnText}>
                     Pagar (TOTAL $)
                </Button>
-          </View>
+          </View> */}
       </Modal>
   )
 }

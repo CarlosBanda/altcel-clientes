@@ -15,12 +15,13 @@ const RecargaModal = ({modalVisible, setModalVisible, producto, number}) => {
 
   const [ categoriaRecarga, setCategoriaRecarga ] = useState('') ;
 
-  const [useGetRecarga, setUseGetRecarga] = useState({});
+  const [useGetRecarga, setUseGetRecarga] = useState([]);
 
   
   const getRecarga = async () => {
     try {
-          const response = await axios.get(`https://appmobile.altcel2.com/planes?product=${producto}`);
+          const response = await axios.get('https://appmobile.altcel2.com/planes?product='+producto);
+          // const response = await axios.get(`https://appmobile.altcel2.com/planes?product=${producto}`);
             setUseGetRecarga(response.data.rates);
             console.log("response.data.rates",response.data.rates);
         } catch (error) {
@@ -30,7 +31,7 @@ const RecargaModal = ({modalVisible, setModalVisible, producto, number}) => {
  
   useEffect(() => {  
     getRecarga();
-  });
+  },[useGetRecarga]);
 
   // const itemsInPicker = useGetRecarga.map( data=> {
   //   const dataRace = data.name + " - " + "$"+data.price
@@ -92,11 +93,11 @@ const RecargaModal = ({modalVisible, setModalVisible, producto, number}) => {
               >
                 {/* {itemsInPicker}  */}
                 <Picker.Item label="-- Seleccione --" value="" />
-                {/* {
+                {
                     useGetRecarga.map( data => (
                       <Picker.Item label={data.name + " - " + "$"+data.price} key={data.id} value={data.id}/>
                     ))
-                } */}
+                }
               </Picker>
             </View> 
             <Pressable 
