@@ -10,11 +10,11 @@ const InputsLogin = () => {
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
     const {getLogin, dataLogin, login} = dataLogged();
-    const {getDevices} = getDataDB();
+    // const {getDevices} = getDataDB();
 
-    if (login) {
-        getDevices(dataLogin.user_id)
-    }
+    // if (login) {
+    //     getDevices(dataLogin.user_id)
+    // }
 
     const handRegistro = () => {
         if(password.length < 8){
