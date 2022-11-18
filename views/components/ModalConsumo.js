@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Button, StyleSheet, View ,Text} from 'react-native';
 import { globalStyle } from '../../styles/'
-import ProgressBar from 'react-native-progress/Bar'
+import {Progress} from 'react-native-progress'
 import Icon from 'react-native-vector-icons/FontAwesome'
 // import Card from './card';
 const ModalConsumo = (service, {setModalConsumo}) => {
@@ -41,21 +41,21 @@ const ModalConsumo = (service, {setModalConsumo}) => {
                                     <Text style={styles.textBody}>Consumo de datos: </Text>
                                     <View style={{marginBottom:10}}>
                                         <Text style={styles.text}>Dtos:</Text>
-                                        <ProgressBar  progress={0.5} width={320} height={10}/>
+                                        <Progress.Bar  progress={0.5} width={320} height={10}/>
                                     </View>
                                     <View style={{marginBottom:10}}>
                                         <Text style={styles.text}>Llamadas:</Text>
-                                        <ProgressBar  progress={0.5} width={320} height={10}/>
+                                        <Progress.Bar  progress={0.5} width={320} height={10}/>
                                     </View>
                                     <View>
                                         <Text style={styles.text}>Mensajes:</Text>
-                                        <ProgressBar  progress={0.5} width={320} height={10}/>
+                                        <Progress.Bar  progress={0.5} width={320} height={10}/>
                                     </View>
                                 </View>
                             :
                             <View>
                                 <Text style={styles.textBody}>Consumo de datos: </Text>
-                                <ProgressBar  progress={0.5} width={320} height={10}/>
+                                <Progress.Bar  progress={0.5} width={320} height={10}/>
                                 {/* <CircularProgress value={58} /> */}
                             </View>
                         }
