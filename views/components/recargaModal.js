@@ -31,7 +31,7 @@ const RecargaModal = ({modalVisible, setModalVisible, producto, number}) => {
  
   useEffect(() => {  
     getRecarga();
-  },[useGetRecarga]);
+  },[]);
 
   // const itemsInPicker = useGetRecarga.map( data=> {
   //   const dataRace = data.name + " - " + "$"+data.price

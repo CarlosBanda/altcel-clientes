@@ -8,6 +8,7 @@ import axios from "axios";
 export const getDataDB = () => {
     const [useGetDevice, setUseGetDevice] = useState({})
     const [useGetDeviceRecharge, setUseGetDeviceRecharge] = useState({})
+    const [useProducts, setUseProducts] = useState([])
     const [isLoading, setIsLoading] = useState(false)
 
     const getDevices = async () => {
@@ -52,18 +53,35 @@ export const getDataDB = () => {
         }
     }
 
+    const getPrdocuts = async ({service}) =>{
+        console.log(service, 'PETITIONS')
+        try {
+            const response = await axios.get('https://appmobile.altcel2.com/planes?product='+product);
+            setUseProducts(response.data.rates);
+              console.log("response.data.rates",response.data.rates);
+          } catch (error) {
+                console.log(error);
+            }
+    }
+
     useEffect(() => {
       
         getDevices();
     }, [])
+    
     useEffect(() => {
       
         getDevicesRecharge();
     }, [])
 
+    useEffect(() => {      
+        getPrdocuts();
+    }, [])
+
     return{
         useGetDevice,
         isLoading,
-        useGetDeviceRecharge
+        useGetDeviceRecharge,
+        useProducts
     }
 }

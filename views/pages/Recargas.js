@@ -23,18 +23,18 @@ const diccionarioLogo = {
 const Recargas = () => {
 
     const [modalVisible, setModalVisible] = useState(false);
-    const {useGetDevice} = getDataDB();
-
+    const {useGetDeviceRecharge, getPrdocuts} = getDataDB();
     const [producto, setProduct] = useState('');
     const [number, setNumber] = useState('');
 
-    
-    const getDataNumber = data => {
-        setProduct(data.producto);
-        setNumber(data.number);
-        setModalVisible(true);
+    // console.log(useGetDeviceRecharge[0].service, 'LALO PUTO')
+    // const getDataNumber = data => {
+    //     getPrdocuts()
+    //     setProduct(data.producto);
+    //     setNumber(data.number);
+    //     setModalVisible(true);
 
-    }
+    // }
 
     return ( 
         <>
@@ -50,9 +50,9 @@ const Recargas = () => {
             </View>
 
             {
-              useGetDevice.length === 0 ? <Text></Text> :
+              useGetDeviceRecharge.length === 0 ? <Text></Text> :
                 <FlatList
-                  data={useGetDevice}
+                  data={useGetDeviceRecharge}
                   keyExtractor={(item) => item.compay}
                   renderItem={({item}) => {return(
                   <ScrollView>
@@ -105,8 +105,8 @@ const Recargas = () => {
                         </View>
                         <Pressable
                           style={styles.btnRecargar}
-                            onPress={() => 
-                              getDataNumber({producto: item.service, number: item.number})
+                            onPress={() => getPrdocuts(item)
+                              // getDataNumber({producto: item.service, number: item.number})
                             }
                         >
                           <Text style={styles.textoRecargar} component={PanelNavigations}>
