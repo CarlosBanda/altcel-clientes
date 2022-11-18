@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 
 import PanelNavigations from '../../views/pages/Profile';
 import RecargaModal from "../components/recargaModal";
+
 import { getDataDB } from '../../helpers/getDataDB/';
 
 
@@ -24,98 +25,101 @@ const Recargas = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const {useGetDevice} = getDataDB();
 
-    const [product, setProduct] = useState('');
+    const [producto, setProduct] = useState('');
     const [number, setNumber] = useState('');
 
+    
     const getDataNumber = data => {
-        setProduct(data.product);
+        setProduct(data.producto);
         setNumber(data.number);
         setModalVisible(true);
+
     }
 
     return ( 
         <>
-        <RecargaModal
+          <RecargaModal
             modalVisible={modalVisible}
             setModalVisible={setModalVisible}
-            product={product}
+            producto={producto}
             number={number}
-        />
-            <View style={styles.contenedor}>
-                <View style={styles.headerDevice}>
-                    <Text style={styles.tituloNumero}>Mis números</Text>
-                </View>
-
-                {
-                    useGetDevice.length === 0 ? <Text></Text> :
-
-                    <FlatList
-                        data={useGetDevice}
-                        keyExtractor={(item) => item.compay}
-                        renderItem={({item}) => {return(
-                        <ScrollView>
-                            <>
-                                <View style={styles.card}>
-                                    <View style={styles.content}>
-                                        <View style={styles.infoPlan}>
-                                            <View style={styles.mtText}>
-                                                <Text style={[styles.text, styles.infoCenter]}>{item.number}</Text>
-                                                { item.service == 'MOV' &&
-                                                (
-                                                <View>
-                                                    <View>
-                                                    <Image style={styles.servicioMov} source={diccionarioServicio[item.service]}/>
-                                                    </View>
-                                                    <View>
-                                                    <Image style={styles.logoMov} source={diccionarioLogo[item.service]}/>
-                                                    </View>
-                                                </View>
-                                                )}
-                    
-                                                { item.service == 'MIFI' &&
-                                                (
-                                                <View>
-                                                    <View>
-                                                    <Image style={styles.servicioMifi} source={diccionarioServicio[item.service]}/>
-                                                    </View>
-                                                    <View>
-                                                    <Image style={styles.logoMifi} source={diccionarioLogo[item.service]}/>
-                                                    </View>
-                                                </View>
-                                                )}
-                    
-                                                { item.service == 'HBB' &&
-                                                (
-                                                <View>
-                                                    <View>
-                                                    <Image style={styles.servicioHbb} source={diccionarioServicio[item.service]}/>
-                                                    </View>
-                                                    <View>
-                                                    <Image style={styles.logoHbb} source={diccionarioLogo[item.service]}/>
-                                                    </View>
-                                                </View>
-                                                )}
-                                            </View>
-                                        </View>
-                                    </View>
-                                    <Pressable
-                                        style={styles.btnRecargar}
-                                        onPress={() => {
-                                        getDataNumber({product: item.service, number: item.number})
-                                        }
-                                        }
-                                    >
-                                        <Text style={styles.textoRecargar} component={PanelNavigations}>
-                                            <Icon name="shopping-cart" size={30} /> Recargar
-                                        </Text>
-                                    </Pressable>
-                                </View>
-                            </>
-                        </ScrollView>
-                    )}}
-                  />
-                }
+          />
+          <View style={styles.contenedor}>
+            <View style={styles.headerDevice}>
+                <Text style={styles.tituloNumero}>Mis números</Text>
             </View>
+
+            {
+              useGetDevice.length === 0 ? <Text></Text> :
+                <FlatList
+                  data={useGetDevice}
+                  keyExtractor={(item) => item.compay}
+                  renderItem={({item}) => {return(
+                  <ScrollView>
+                    <View>
+                      <View style={styles.card}>
+                        <View style={styles.content}>
+                          <View style={styles.infoPlan}>
+                            <View style={styles.mtText}>
+                              <Text style={[styles.text, styles.infoCenter]}>{item.number}</Text>
+                              { item.service == 'MOV' &&
+                                (
+                                  <View>
+                                    <View>
+                                      <Image style={styles.servicioMov} source={diccionarioServicio[item.service]}/>
+                                    </View>
+                                    <View>
+                                      <Image style={styles.logoMov} source={diccionarioLogo[item.service]}/>
+                                    </View>
+                                  </View>
+                                )
+                              }
+                    
+                              { item.service == 'MIFI' &&
+                                (
+                                  <View>
+                                    <View>
+                                      <Image style={styles.servicioMifi} source={diccionarioServicio[item.service]}/>
+                                    </View>
+                                    <View>
+                                      <Image style={styles.logoMifi} source={diccionarioLogo[item.service]}/>
+                                    </View>
+                                  </View>
+                                )
+                              }
+                    
+                              { item.service == 'HBB' &&
+                                (
+                                  <View>
+                                    <View>
+                                      <Image style={styles.servicioHbb} source={diccionarioServicio[item.service]}/>
+                                    </View>
+                                    <View>
+                                      <Image style={styles.logoHbb} source={diccionarioLogo[item.service]}/>
+                                    </View>
+                                  </View>
+                                )
+                              }
+                            </View>
+                          </View>
+                        </View>
+                        <Pressable
+                          style={styles.btnRecargar}
+                            onPress={() => 
+                              getDataNumber({producto: item.service, number: item.number})
+                            }
+                        >
+                          <Text style={styles.textoRecargar} component={PanelNavigations}>
+                            <Icon name="shopping-cart" size={30} /> Recargar
+                          </Text>
+                        </Pressable>
+                      </View>
+                    </View>
+                  </ScrollView>
+                    )}}
+                />
+            }
+          </View>
         </>
      );
 }

@@ -14,7 +14,7 @@ export const getDataDB = () => {
         setIsLoading(true)
             try {
                 const userid = 41;
-                const response = await axios.get('https://appmobile.altcel2.com/devices?userid='+userid);
+                const response = await axios.get('https://appmobile.altcel2.com/devicesRecharge?userid='+userid);
                 setUseGetDevice(response.data.devices)
                 setIsLoading(false)
             } catch (error) {
