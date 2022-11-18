@@ -1,18 +1,66 @@
-import React from 'react'
-import {SafeAreaView, Modal, Text, StyleSheet, View, Image, Pressable, Picker} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {SafeAreaView, Modal, Text, StyleSheet, View, Image, Pressable} from 'react-native';
+import { Picker } from '@react-native-picker/picker';
 
-const RecargaModal = ({modalVisible, setModalVisible, product, number}) => {
+import PanelNavigations from '../../views/pages/Profile';
+import Icon from 'react-native-vector-icons/FontAwesome'
+import axios from "axios";
+
+import RecargaStripe from './recargaStripe';
+
+
+const RecargaModal = ({modalVisible, setModalVisible, producto, number}) => {
+
+  const [modalStripe, setModalStripe] = useState(false);
+
+  const [ categoriaRecarga, setCategoriaRecarga ] = useState('') ;
+
+  const [useGetRecarga, setUseGetRecarga] = useState({});
+
+  
+  const getRecarga = async () => {
+    try {
+          const response = await axios.get(`https://appmobile.altcel2.com/planes?product=${producto}`);
+            setUseGetRecarga(response.data.rates);
+            console.log("response.data.rates",response.data.rates);
+        } catch (error) {
+              console.log(error);
+          }
+  }
+ 
+  useEffect(() => {  
+    getRecarga();
+  });
+
+  // const itemsInPicker = useGetRecarga.map( data=> {
+  //   const dataRace = data.name + " - " + "$"+data.price
+  //   return <Picker.Item label={dataRace} key={data.id} value={data.id}/>
+  // });
+
+  const realizarPago = pago =>{
+    setModalStripe(true);  
+    // console.log(pago)
+  }
+
+  const { offerID } = useGetRecarga;
+  console.log("offerID",offerID)
+
   return (
      <Modal
         animationType='slide'
         visible={modalVisible}
      >
+        <RecargaStripe
+          setModalStripe = {setModalStripe}
+          modalStripe = {modalStripe}
+          categoriaRecarga = {categoriaRecarga}
+        />
         <SafeAreaView>
           <View style={styles.headerDevice}>
             <Text style={styles.tituloNumero}>Mis números {number}</Text>
           </View>
 
-          <View style={styles.contenedorBotones}>
+          <View>
             <Pressable 
                 onPress={() => {
                   setModalVisible(false)
@@ -25,7 +73,7 @@ const RecargaModal = ({modalVisible, setModalVisible, product, number}) => {
           
           <View style={styles.card}>
             <View>
-              <Text style={[styles.text, styles.infoHbb]}>{product}</Text>
+              <Text style={[styles.text, styles.infoHbb]}>{producto}</Text>
               <Text style={[styles.text, styles.infoCenter]}>{number}</Text>
             </View>
             <View>
@@ -35,24 +83,31 @@ const RecargaModal = ({modalVisible, setModalVisible, product, number}) => {
               <Text style={styles.textoPlanes}>Planes disponibles</Text>
             </View>
 
-            {/* <View style={styles.inputPicker}>
+            <View style={styles.inputPicker}>
               <Picker
                 selectedValue={categoriaRecarga}
                 onValueChange={(valor) => {
-                setCategoriaRecarga(valor)
-            }}
+                  setCategoriaRecarga(valor)
+                }}
               >
-                {itemsInPicker} */}
-                {/* <Picker.Item label="-- Seleccione --" value="" style={styles.colorLabel}/> */}
-              {/* </Picker>
-            </View> */}
+                {/* {itemsInPicker}  */}
+                <Picker.Item label="-- Seleccione --" value="" />
+                {/* {
+                    useGetRecarga.map( data => (
+                      <Picker.Item label={data.name + " - " + "$"+data.price} key={data.id} value={data.id}/>
+                    ))
+                } */}
+              </Picker>
+            </View> 
             <Pressable 
                 style={styles.btnRecargar}
-                // onPress={getRecarga}
+                onPress={() =>
+                  realizarPago(categoriaRecarga)
+                }
                 >
-                {/* <Text style={styles.textoRecargar}>
-                <Icon name="cart-outline" size={30} />Recargar
-                </Text> */}
+                <Text style={styles.textoRecargar} component={PanelNavigations}>
+                  <Icon name="credit-card-alt" size={20} /> Pagar
+                </Text> 
             </Pressable>
           </View>
         </SafeAreaView>
@@ -90,10 +145,10 @@ const styles = StyleSheet.create({
      },
      btnRecargar:{
        backgroundColor: '#001b54',
-       paddingVertical: 5,
-       paddingHorizontal: 70,
+       paddingVertical: 7,
+       paddingHorizontal: 20,
        borderRadius: 5,
-       marginVertical: 10
+       marginVertical: 20
    
      },
      textoRecargar:{
@@ -130,20 +185,18 @@ const styles = StyleSheet.create({
        flexDirection: 'row',
        justifyContent: 'space-between'
      },
-     planes:{
-       // marginHorizontal: 60
-       
-     },
      textoPlanes:{
        color: '#919292',
-       fontSize: 18,
+       fontSize: 20,
        marginHorizontal: -140,
-       marginVertical: 20
+       marginVertical: 20,
+       textAlign: 'center'
      },
      inputPicker:{
        backgroundColor: '#919292',
        width: '90%',
        borderRadius: 5,
+      
      },
      colorLabel:{
        color: '#000'
@@ -164,6 +217,6 @@ const styles = StyleSheet.create({
        color: '#FFF',
        fontSize: 20
    },
-   })
+})
 
 export default RecargaModal

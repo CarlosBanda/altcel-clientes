@@ -5,7 +5,7 @@ import { globalStyle } from '../../styles'
 // import  ModalConsumo  from './modalConsumo';
 
 function Card({device}) {
-    console.log(device)
+    // console.log(device)
     // const {number, company, service, user_email, created_at, id} = device;
     const [modalConsumo, setModalConsumo] = useState(false)
     // const {consultUF} = getDataAltan();
