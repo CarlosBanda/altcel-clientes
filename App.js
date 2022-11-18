@@ -5,7 +5,7 @@ import Navigations from './routes/Navigations'
 
 
 const App = () => {
-  const [dato, setDato] = useState(false);
+  const [dato, setDato] = useState(true);
 
   return (
     <>
